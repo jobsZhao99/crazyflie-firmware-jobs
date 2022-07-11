@@ -56,6 +56,7 @@
 #include "statsCnt.h"
 #include "static_mem.h"
 #include "rateSupervisor.h"
+#include "CB_Controller.h"
 
 static bool isInit;
 static bool emergencyStop = false;
@@ -68,7 +69,8 @@ static setpoint_t setpoint;
 static sensorData_t sensorData;
 static state_t state;
 static control_t control;
-static motors_thrust_t motorPower;
+static CB_control_t CB_control;
+// static motors_thrust_t motorPower;
 // For scratch storage - never logged or passed to other subsystems.
 static setpoint_t tempSetpoint;
 
@@ -270,9 +272,10 @@ static void stabilizerTask(void* param)
       commanderGetSetpoint(&setpoint, &state);
       compressSetpoint();
 
-      collisionAvoidanceUpdateSetpoint(&setpoint, &sensorData, &state, tick);
+      //collisionAvoidanceUpdateSetpoint(&setpoint, &sensorData, &state, tick);
 
       controller(&control, &setpoint, &sensorData, &state, tick);
+      CB_Controller(&CB_control,&sensorData,&state);
 
       checkEmergencyStopTimeout();
 
@@ -285,11 +288,12 @@ static void stabilizerTask(void* param)
       if (emergencyStop || (systemIsArmed() == false)) {
         motorsStop();
       } else {
-        powerDistribution(&motorPower, &control);
-        motorsSetRatio(MOTOR_M1, motorPower.m1);
-        motorsSetRatio(MOTOR_M2, motorPower.m2);
-        motorsSetRatio(MOTOR_M3, motorPower.m3);
-        motorsSetRatio(MOTOR_M4, motorPower.m4);
+        CB_Motor();
+        //powerDistribution(&motorPower, &control);
+        //motorsSetRatio(MOTOR_M1, motorPower.m1);
+        //motorsSetRatio(MOTOR_M2, motorPower.m2);
+        //motorsSetRatio(MOTOR_M3, motorPower.m3);
+        //motorsSetRatio(MOTOR_M4, motorPower.m4);
       }
 
 #ifdef CONFIG_DECK_USD

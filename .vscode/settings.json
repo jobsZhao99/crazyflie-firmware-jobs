@@ -5,6 +5,13 @@
         "**/bower_components": true
     },
     "files.associations": {
-        "bootloader.h": "c"
+        "bootloader.h": "c",
+        "autoconf.h": "c",
+        "cfassert.h": "c",
+        "cb_controller.h": "c",
+        "quatcompress.h": "c",
+        "statscnt.h": "c",
+        "ratesupervisor.h": "c",
+        "pid.h": "c"
     }
 }

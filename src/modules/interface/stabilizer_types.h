@@ -174,6 +174,7 @@ typedef struct control_s {
   float thrust;
 } control_t;
 
+
 typedef struct motors_thrust_s {
   uint16_t m1;  // PWM ratio
   uint16_t m2;  // PWM ratio

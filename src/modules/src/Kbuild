@@ -56,7 +56,8 @@ obj-y += system.o
 obj-y += tdoaEngineInstance.o
 obj-y += vcp_esc_passthrough.o
 obj-y += worker.o
-
+# Chongbo's Controller
+obj-y += CB_Controller.o
 # Kalman core
 obj-$(CONFIG_ESTIMATOR_KALMAN_ENABLE) += kalman_core/
 
