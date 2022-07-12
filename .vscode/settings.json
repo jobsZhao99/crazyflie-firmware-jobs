@@ -12,6 +12,7 @@
         "quatcompress.h": "c",
         "statscnt.h": "c",
         "ratesupervisor.h": "c",
-        "pid.h": "c"
+        "pid.h": "c",
+        "math3d.h": "c"
     }
 }

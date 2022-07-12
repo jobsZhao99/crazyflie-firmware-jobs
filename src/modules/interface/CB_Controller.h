@@ -1,21 +1,21 @@
 #include "stabilizer_types.h"
 
 // position
-#define Kp_X 1
-#define Kp_Y 1
-#define Kp_Z 1
+#define Kp_X 30
+#define Kp_Y 30
+#define Kp_Z 30
 //velocity
-#define Kd_X 1
-#define Kd_Y 1
-#define Kd_Z 1
+#define Kd_X 9
+#define Kd_Y 9
+#define Kd_Z 9
 //attitude
-#define Kq_Roll 1
-#define Kq_Pitch 1
-#define Kq_Yaw 1
+#define Kq_Roll 250
+#define Kq_Pitch 250
+#define Kq_Yaw 250
 //angular velocity in body frame
-#define Kw_Roll 1
-#define Kw_Pitch  1
-#define Kw_Yaw 1
+#define Kw_Roll 6
+#define Kw_Pitch  6
+#define Kw_Yaw 6
 
 
 typedef struct CB_ontrol_s {
