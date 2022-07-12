@@ -274,8 +274,8 @@ static void stabilizerTask(void* param)
 
       //collisionAvoidanceUpdateSetpoint(&setpoint, &sensorData, &state, tick);
 
-      //controller(&control, &setpoint, &sensorData, &state, tick);
-      CB_Controller(&control,&sensorData,&state);
+      controller(&control, &setpoint, &sensorData, &state, tick);
+      //CB_Controller(&CB_control,&sensorData,&state);
 
       checkEmergencyStopTimeout();
 
@@ -289,7 +289,7 @@ static void stabilizerTask(void* param)
         motorsStop();
       } else {
         CB_Motor(&motorPower,&CB_control);
-        powerDistribution(&motorPower, &CB_control);
+        //powerDistribution(&motorPower, &CB_control);
         motorsSetRatio(MOTOR_M1, motorPower.m1);
         motorsSetRatio(MOTOR_M2, motorPower.m2);
         motorsSetRatio(MOTOR_M3, motorPower.m3);

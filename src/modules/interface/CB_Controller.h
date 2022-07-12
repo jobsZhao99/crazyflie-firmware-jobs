@@ -18,12 +18,12 @@
 #define Kw_Yaw 6
 
 
-typedef struct CB_ontrol_s {
+typedef struct CB_control_s {
   int16_t roll;
   int16_t pitch;
   int16_t yaw;
   float thrust;
 }CB_control_t;
 
-void CB_Controller(CB_control_t *control, const sensorData_t *sensors, const state_t *state);
+void CB_Controller(CB_control_t *CB_control, const sensorData_t *sensors, const state_t *state);
 void CB_Motor(motors_thrust_t *motorPower,CB_control_t *CB_Control);
