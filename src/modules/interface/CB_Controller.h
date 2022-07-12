@@ -26,4 +26,4 @@ typedef struct CB_ontrol_s {
 }CB_control_t;
 
 void CB_Controller(CB_control_t *control, const sensorData_t *sensors, const state_t *state);
-void CB_Motor();
+void CB_Motor(motors_thrust_t *motorPower,CB_control_t *CB_Control);

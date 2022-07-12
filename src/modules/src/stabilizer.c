@@ -70,7 +70,7 @@ static sensorData_t sensorData;
 static state_t state;
 static control_t control;
 static CB_control_t CB_control;
-// static motors_thrust_t motorPower;
+static motors_thrust_t motorPower;
 // For scratch storage - never logged or passed to other subsystems.
 static setpoint_t tempSetpoint;
 
@@ -274,8 +274,8 @@ static void stabilizerTask(void* param)
 
       //collisionAvoidanceUpdateSetpoint(&setpoint, &sensorData, &state, tick);
 
-      controller(&control, &setpoint, &sensorData, &state, tick);
-      CB_Controller(&CB_control,&sensorData,&state);
+      //controller(&control, &setpoint, &sensorData, &state, tick);
+      CB_Controller(&control,&sensorData,&state);
 
       checkEmergencyStopTimeout();
 
@@ -288,12 +288,12 @@ static void stabilizerTask(void* param)
       if (emergencyStop || (systemIsArmed() == false)) {
         motorsStop();
       } else {
-        CB_Motor();
-        //powerDistribution(&motorPower, &control);
-        //motorsSetRatio(MOTOR_M1, motorPower.m1);
-        //motorsSetRatio(MOTOR_M2, motorPower.m2);
-        //motorsSetRatio(MOTOR_M3, motorPower.m3);
-        //motorsSetRatio(MOTOR_M4, motorPower.m4);
+        CB_Motor(&motorPower,&CB_control);
+        powerDistribution(&motorPower, &CB_control);
+        motorsSetRatio(MOTOR_M1, motorPower.m1);
+        motorsSetRatio(MOTOR_M2, motorPower.m2);
+        motorsSetRatio(MOTOR_M3, motorPower.m3);
+        motorsSetRatio(MOTOR_M4, motorPower.m4);
       }
 
 #ifdef CONFIG_DECK_USD
