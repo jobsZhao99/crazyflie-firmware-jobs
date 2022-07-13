@@ -193,7 +193,7 @@ Warning: if multiple Crazyflies within range are in bootloader mode the result i
 
 ### Automatically enter bootloader mode
 * Make sure the Crazyflie is on
-* In your terminal, run `CLOAD_CMDS="-w radio://0/80/2M" make cload`
+* In your terminal, run `CLOAD_CMDS="-w radio://0/90/2M" make cload`
 
 It will connect to the Crazyflie with the specified address, put it in bootloader mode and flash the binary. This method is suitable for classroom situations.
 

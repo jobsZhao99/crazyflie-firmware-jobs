@@ -274,9 +274,10 @@ static void stabilizerTask(void* param)
 
       //collisionAvoidanceUpdateSetpoint(&setpoint, &sensorData, &state, tick);
 
-      controller(&control, &setpoint, &sensorData, &state, tick);
-      //CB_Controller(&CB_control,&sensorData,&state);
-
+      //controller(&control, &setpoint, &sensorData, &state, tick);
+      
+      CB_Controller(&CB_control,&setpoint,&sensorData,&state,tick);
+      // DEBUG_PRINT("roll%f\t pitch%f\t yaw%f\t thrust%f\n",(double)CB_control.torque_roll,(double)CB_control.torque_pitch,(double)CB_control.torque_yaw,(double)CB_control.thrust);
       checkEmergencyStopTimeout();
 
       //
@@ -289,12 +290,15 @@ static void stabilizerTask(void* param)
         motorsStop();
       } else {
         CB_Motor(&motorPower,&CB_control);
-        //powerDistribution(&motorPower, &CB_control);
+        // powerDistribution(&motorPower, &CB_control);
         motorsSetRatio(MOTOR_M1, motorPower.m1);
         motorsSetRatio(MOTOR_M2, motorPower.m2);
         motorsSetRatio(MOTOR_M3, motorPower.m3);
         motorsSetRatio(MOTOR_M4, motorPower.m4);
       }
+      //  if(tick%1000==0)
+      //   DEBUG_PRINT("roll%f\t%f,\tpitch%f\t%f\t,thruse u3:%d\tu4:%d\n",(double)CB_control.torque_roll,(double)state.attitude.roll,(double)CB_control.torque_pitch,-(double)state.attitude.pitch, motorPower.m3, motorPower.m4);
+       
 
 #ifdef CONFIG_DECK_USD
       // Log data to uSD card if configured
